@@ -26,6 +26,18 @@ module.exports = function (grunt) {
 
   // Define the configuration for all the tasks
   grunt.initConfig({
+    // https://www.npmjs.org/package/grunt-gh-pages
+    'gh-pages': {
+      // no-args/default is staging deployment. 'grunt gh-pages:prod' for production.
+      options: {
+        base: 'dist'
+      },
+      default_: {
+        // default options
+        options: {},
+        src: ['**']
+      },
+    },
 
     // Project settings
     config: config,
@@ -71,6 +83,8 @@ module.exports = function (grunt) {
             '.tmp/scripts/{,*/}*.js'
           ],
           port: 9000,
+          //host: '0.0.0.0',
+          open: false,
           server: {
             baseDir: ['.tmp', config.app],
             routes: {
@@ -446,5 +460,10 @@ module.exports = function (grunt) {
     'newer:eslint',
     'test',
     'build'
+  ]);
+
+  grunt.registerTask('deploy', [
+    'build',
+    'gh-pages'
   ]);
 };
