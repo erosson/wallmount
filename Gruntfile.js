@@ -31,11 +31,11 @@ module.exports = function (grunt) {
     'gh-pages': {
       // no-args/default is staging deployment. 'grunt gh-pages:prod' for production.
       options: {
-        base: 'dist'
         user: {
           name: grunt.option('user.name') || null,
           email: grunt.option('user.email') || null,
         },
+        base: 'dist'
       },
       default_: {
         // default options
