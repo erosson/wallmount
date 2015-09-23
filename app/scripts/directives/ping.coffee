@@ -27,7 +27,7 @@ angular.module('wallmountApp').directive 'ping', ($interval, $timeout, $http) ->
         scope.ping.ms = ms
         scope.ping.list.push scope.ping.ms
         if scope.ping.list.length > 60
-          scope.ping.list.pop 0
+          scope.ping.list.shift()
         scope.ping.max = Math.max.apply null, scope.ping.list
         
       do refresh = ->
