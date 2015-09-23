@@ -23,19 +23,22 @@ angular.module('wallmountApp').directive 'ping', ($interval, $timeout, $http) ->
         else
           Date.now()
       scope.ping = {list:[]}
+      push = (ms) ->
+        scope.ping.ms = ms
+        scope.ping.list.push scope.ping.ms
+        if scope.ping.list.length > 60
+          scope.ping.pop 0
+        scope.ping.max = Math.max.apply null, scope.ping.list
         
       do refresh = ->
         start = now()
         $http.get '/'
         .then ->
           end = now()
-          scope.ping.ms = end - start
-          scope.ping.list.push scope.ping.ms
-          if scope.ping.list.length > 60
-            scope.ping.pop 0
-          scope.ping.max = Math.max.apply null, scope.ping.list
+          push end - start
           $timeout refresh, 1000
         , ->
+          push 99999
           $timeout refresh, 1000
       # timeout instead of refresh - no need to have multiple pings out at once during lag
       #$interval refresh, 1000
