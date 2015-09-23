@@ -11,4 +11,6 @@ Run `grunt` for building and `grunt serve` for preview. `grunt deploy` pushes to
 
 ## Testing
 
-Running `grunt test` will run the unit tests with karma. I haven't really bothered to write any yet though.
+Running `grunt test` will run the unit tests with karma.
+
+[![Build Status](https://travis-ci.org/erosson/wallmount.svg)](https://travis-ci.org/erosson/wallmount)
