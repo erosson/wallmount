@@ -52,10 +52,12 @@ angular.module('wallmountApp').directive 'weather', ($interval, $location) ->
         do load = -> refresh loc
         # refresh every 1 hour
         $interval load, 1000 * 60 * 60 * 1
-      #setup 'Hell, Norway'
       if (loc=$location.search().loc)?
         setup loc
       else
-        navigator.geolocation.getCurrentPosition (pos) ->
-          setup "#{pos.coords.latitude},#{pos.coords.longitude}"
-
+        navigator.geolocation.getCurrentPosition
+          (pos) ->
+            setup "#{pos.coords.latitude},#{pos.coords.longitude}"
+          (errorcode, message) ->
+            # some test location. sorry github, I'm not telling you where I live
+            setup 'Hell, Norway'
