@@ -30,7 +30,7 @@ angular.module('wallmountApp').directive 'ping', ($interval, $timeout, $http) ->
           scope.ping.list.shift()
         scope.ping.max = Math.max.apply null, scope.ping.list
         
-      do refresh = ->
+      refresh = ->
         start = now()
         $http.get '/'
         .then ->
@@ -40,5 +40,7 @@ angular.module('wallmountApp').directive 'ping', ($interval, $timeout, $http) ->
         , ->
           push 99999
           $timeout refresh, 1000
+      # pinging during page load always lags, so wait a second
+      $timeout refresh, 1000
       # timeout instead of refresh - no need to have multiple pings out at once during lag
       #$interval refresh, 1000
