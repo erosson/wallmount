@@ -15,11 +15,11 @@ angular.module('wallmountApp').directive 'weather', ($interval, $location) ->
 <div class="weather row container" ng-if="!loading">
   <!--h2><i ng-class="'icon-'+weather.code"></i></h2-->
   <div class="row">
-    <div class="col-xs-6 col-sm-6" style="text-align:right"><img style="max-width:100%" ng-src="{{weather.image}}"></div>
-    <div class="col-xs-6 col-sm-6" style="text-align:left">
+    <div class="col-xs-6 col-sm-6">
       <h1>{{weather.temp}}&deg;{{weather.units.temp}}</h1>
       <div>{{weather.city}}{{region}}{{country}}</div>
     </div>
+    <div class="col-xs-6 col-sm-6" style="text-align:left"><img style="max-width:100%" ng-src="{{weather.image}}"></div>
   </div>
   <!--div class="row">
     <div class="forecast" ng-repeat="forecast in weather.forecast">
@@ -55,9 +55,10 @@ angular.module('wallmountApp').directive 'weather', ($interval, $location) ->
       if (loc=$location.search().loc)?
         setup loc
       else
-        navigator.geolocation.getCurrentPosition
+        navigator.geolocation.getCurrentPosition(
           (pos) ->
             setup "#{pos.coords.latitude},#{pos.coords.longitude}"
           (errorcode, message) ->
             # some test location. sorry github, I'm not telling you where I live
             setup 'Hell, Norway'
+        )
