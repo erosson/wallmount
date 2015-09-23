@@ -14,13 +14,17 @@ angular.module('wallmountApp').directive 'weather', ($interval, $location) ->
 </div>
 <div class="weather row container" ng-if="!loading">
   <!--h2><i ng-class="'icon-'+weather.code"></i></h2-->
-  <div class="row">
-    <div class="col-xs-6 col-sm-6">
-      <h1>{{weather.temp}}&deg;{{weather.units.temp}}</h1>
-      <div>{{weather.city}}{{region}}{{country}}</div>
-    </div>
-    <div class="col-xs-6 col-sm-6" style="text-align:left"><img style="max-width:100%" ng-src="{{weather.image}}"></div>
+  <div style="float:left;">
+    <h1>{{weather.temp}}&deg;{{weather.units.temp}}</h1>
+    <div>{{weather.city}}{{region}}{{country}}</div>
   </div>
+  <div style="float:left;overflow:hidden;width:180px;height:180px">
+    <img ng-src="{{weather.image}}">
+  </div>
+    <!--div class="col-xs-6 col-sm-6">
+    </div>
+    <div class="col-xs-6 col-sm-6" style="text-align:left"><img style="max-width:100%" ng-src="{{weather.image}}"></div-->
+  <div style="clear:left;"></div>
   <!--div class="row">
     <div class="forecast" ng-repeat="forecast in weather.forecast">
       <div class="small">{{forecast.day}}</div>
