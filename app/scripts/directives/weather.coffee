@@ -21,14 +21,14 @@ angular.module('wallmountApp').directive 'weather', ($interval, $location) ->
       <div>{{weather.city}}{{region}}{{country}}</div>
     </div>
   </div>
-  <div class="row">
+  <!--div class="row">
     <div class="forecast" ng-repeat="forecast in weather.forecast">
       <div class="small">{{forecast.day}}</div>
       <div><img ng-src="{{forecast.thumbnail}}"></div>
       <div class="small">{{forecast.high}}&deg;</div>
       <div class="small">{{forecast.low}}&deg;</div>
     </div>
-  </div>
+  </div-->
 </div>
 """
     link: (scope, element, attrs) ->
