@@ -36,7 +36,7 @@ module.exports = function (grunt) {
           email: grunt.option('user.email') || null,
         },
         // deploy key does not work with https, so force ssh checkout
-        repo: 'git@github.com:erosson/wallboard.git',
+        repo: 'git@github.com:erosson/wallmount.git',
         base: 'dist'
       },
       default_: {
