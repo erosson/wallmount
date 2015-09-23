@@ -9,3 +9,11 @@ before_install:
 before_script:
   - 'npm install -g bower grunt-cli'
   - 'bower install'
+after_success:
+  # auto-deploy key for "real" pushes (not for pull requests). copied from swarmsim travis.yml. http://docs.travis-ci.com/user/encrypting-files/
+  - '[ "${TRAVIS_PULL_REQUEST}" = "false" -a "${TRAVIS_BRANCH}" = "master" ] && openssl aes-256-cbc -K $encrypted_e59f432364be_key -iv $encrypted_e59f432364be_iv -in deploy.pem.enc -out deploy.pem -d'
+  - '[ "${TRAVIS_PULL_REQUEST}" = "false" -a "${TRAVIS_BRANCH}" = "master" ] && chmod 600 deploy.pem || true'
+  - '[ "${TRAVIS_PULL_REQUEST}" = "false" -a "${TRAVIS_BRANCH}" = "master" ] && eval `ssh-agent` || true'
+  - '[ "${TRAVIS_PULL_REQUEST}" = "false" -a "${TRAVIS_BRANCH}" = "master" ] && ssh-add deploy.pem || true'
+  - '[ "${TRAVIS_PULL_REQUEST}" = "false" -a "${TRAVIS_BRANCH}" = "master" ] && grunt deploy --user.name="Evan Rosson (via travis-ci.org robots)" --user.email=`echo "genivf-pv@rebffba.bet" | tr "[A-Za-z]" "[N-ZA-Mn-za-m]"` || true'
+  
