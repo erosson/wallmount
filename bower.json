@@ -12,6 +12,7 @@
     "appcache-nanny": "~1.0.3",
     "bootstrap-sass-official": "^3.2.0",
     "bootswatch-dist": "cyborg",
+    "Chart.js": "~1.0.2",
     "moment": "~2.10.6",
     "simpleWeather": "~3.0.2"
   },

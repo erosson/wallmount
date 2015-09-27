@@ -11,29 +11,47 @@ angular.module('wallmountApp').directive 'ping', ($interval, $timeout, $http) ->
     template: """
 <div>
   <h1>Ping: {{ping.ms|number:0}}ms</h1>
-  <h3>1min max: {{ping.max|number:0}}ms</h3>
-  <small>({{ping.list.length}} samples)</small> 
+  <h6>Max: {{ping.max|number:0}}ms</h6>
+  <canvas id="pingchart" width="400" height="200"></canvas>
 </div>
 """
     link: (scope, element, attrs) ->
+      maxElements = 60
+      chartLabels = []
+      chartPoints = []
+      scope.ping = {list:[]}
+      for i in [0...maxElements]
+        chartLabels.push ''
+        chartPoints.push 0
+        scope.ping.list.push 0
+      chartData =
+        labels: chartLabels
+        datasets: [
+          data:chartPoints
+        ]
+      chart = new window.Chart($("#pingchart").get(0).getContext("2d")).Line chartData,
+        scaleStartValue:0, showScale: true
+        scaleOverride:true, scaleSteps:5, scaleStepWidth: 200
+        showScaleGridLines:false
+        pointDot: true, pointDotRadius:2
       now = ->
         # performance?.now ? Date.now # NOPE illegal invocation
         if performance?.now
           performance.now()
         else
           Date.now()
-      scope.ping = {list:[]}
       push = (ms) ->
         scope.ping.ms = ms
         scope.ping.list.push scope.ping.ms
-        if scope.ping.list.length > 60
-          scope.ping.list.shift()
+        scope.ping.list.shift()
         scope.ping.max = Math.max.apply null, scope.ping.list
+        chart.addData [ms], ''
+        chart.removeData()
         
       interval = 2000
       refresh = ->
         start = now()
-        $http.head '/'
+        $http.head '/', timeout:10000
         .then ->
           end = now()
           push end - start
