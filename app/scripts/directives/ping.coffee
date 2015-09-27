@@ -30,8 +30,12 @@ angular.module('wallmountApp').directive 'ping', ($interval, $timeout, $http) ->
           data:chartPoints
         ]
       chart = new window.Chart($("#pingchart").get(0).getContext("2d")).Line chartData,
+        # animation lags my poor old tablet
+        animation: false
+        # fixed scale makes it easy to see at a glance how we're lagging
         scaleStartValue:0, showScale: true
         scaleOverride:true, scaleSteps:5, scaleStepWidth: 200
+        # other options
         showScaleGridLines:false
         pointDot: true, pointDotRadius:2
       now = ->
