@@ -10,7 +10,7 @@ angular.module('wallmountApp').directive 'clock', ($interval) ->
     restrict: 'EA'
     template: """
 <div class="clock">
-  <h1>{{now.format('HH:mm:ss')}}</h1>
+  <h1 style="font-size:160px">{{now.format('HH:mm:ss')}}</h1>
   <!--h4>{{now.format('dddd, MMMM Do YYYY')}}</h4-->
   <h4>{{now.format('dddd, MMMM Do')}}</h4>
 </div>
