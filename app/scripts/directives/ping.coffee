@@ -10,7 +10,7 @@ angular.module('wallmountApp').directive 'ping', ($interval, $timeout, $http) ->
     restrict: 'EA'
     template: """
 <div>
-  <h1>Ping: {{ping.ms|number:0}}ms</h1>
+  <h1>Ping: {{ping.ms|number:0}}</h1>
   <h6>Max: {{ping.max|number:0}}ms</h6>
   <canvas id="pingchart" width="400" height="200"></canvas>
 </div>
