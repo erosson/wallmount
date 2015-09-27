@@ -44,13 +44,15 @@ angular.module('wallmountApp').directive 'ping', ($interval, $timeout, $http) ->
           performance.now()
         else
           Date.now()
-      push = (ms) ->
+      push = (ms, next) ->
         scope.ping.ms = ms
         scope.ping.list.push scope.ping.ms
         scope.ping.list.shift()
         scope.ping.max = Math.max.apply null, scope.ping.list
         chart.addData [ms], ''
         chart.removeData()
+        # wait a bit before the next ping - gives the chart a chance to update on a slow device
+        $timeout next, interval/2
         
       interval = 2000
       refresh = ->
@@ -58,11 +60,11 @@ angular.module('wallmountApp').directive 'ping', ($interval, $timeout, $http) ->
         $http.head '/', timeout:10000
         .then ->
           end = now()
-          push end - start
-          $timeout refresh, interval
+          push end - start, ->
+            $timeout refresh, interval
         , ->
-          push 99999
-          $timeout refresh, interval
+          push 99999, ->
+            $timeout refresh, interval
       # pinging during page load always lags, so wait a second
       $timeout refresh, interval
       # timeout instead of refresh - no need to have multiple pings out at once during lag
