@@ -30,3 +30,11 @@ angular
       .otherwise
         redirectTo: '/'
 
+# https://github.com/gr2m/appcache-nanny
+# autoreload on deploy
+angular.module('wallmountApp').run ->
+  appCacheNanny = window.appCacheNanny
+  # this is the default, let's just make it explicit
+  appCacheNanny.start checkInterval: 30000
+  appCacheNanny.on 'updateready', ->
+    location.reload()

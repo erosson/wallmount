@@ -23,6 +23,7 @@
     "grunt-gh-pages": "^0.10.0",
     "grunt-google-cdn": "^0.4.3",
     "grunt-karma": "*",
+    "grunt-manifest": "^0.4.4",
     "grunt-newer": "^1.1.0",
     "grunt-ng-annotate": "^0.9.2",
     "grunt-svgmin": "^2.0.0",

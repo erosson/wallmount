@@ -46,6 +46,33 @@ module.exports = function (grunt) {
       },
     },
 
+    manifest: {
+      generate: {
+        options: {
+          basePath: '<%= yeoman.dist %>',
+          cache: [],
+          network: ['*', 'http://*', 'https://*'],
+          //fallback: ['/ /offline.html'],
+          exclude: ['js/jquery.min.js'],
+          preferOnline: true,
+          //headcomment: " <%= pkg.name %> v<%= pkg.version %>",
+          verbose: true,
+          timestamp: true,
+          hash: true,
+          master: ['index.html'],
+          process: function(path) {
+            //return path.substring('app/'.length);
+            return path;
+          }
+        },
+        src: [
+          'views/*.html',
+          'scripts/*.js',
+          'styles/*.css',
+        ],
+        dest: '<%= yeoman.dist %>/manifest.appcache'
+      }
+    },
 
     // Project settings
     yeoman: appConfig,
@@ -90,11 +117,11 @@ module.exports = function (grunt) {
         port: 9000,
         // Change this to '0.0.0.0' to access the server from outside.
         hostname: '0.0.0.0',
+        open: false,
         livereload: 35729
       },
       livereload: {
         options: {
-          open: false,
           middleware: function (connect) {
             return [
               connect.static('.tmp'),
@@ -129,7 +156,6 @@ module.exports = function (grunt) {
       },
       dist: {
         options: {
-          open: true,
           base: '<%= yeoman.dist %>'
         }
       }
@@ -310,6 +336,7 @@ module.exports = function (grunt) {
       html: ['<%= yeoman.dist %>/{,*/}*.html'],
       css: ['<%= yeoman.dist %>/styles/{,*/}*.css'],
       js: ['<%= yeoman.dist %>/scripts/{,*/}*.js'],
+      manifest: ['<%= yeoman.dist %>/manifest.appcache'],
       options: {
         assetsDirs: [
           '<%= yeoman.dist %>',
@@ -317,7 +344,8 @@ module.exports = function (grunt) {
           '<%= yeoman.dist %>/styles'
         ],
         patterns: {
-          js: [[/(images\/[^''""]*\.(png|jpg|jpeg|gif|webp|svg))/g, 'Replacing references to images']]
+          js: [[/(images\/[^''""]*\.(png|jpg|jpeg|gif|webp|svg))/g, 'Replacing references to images']],
+          //manifest: [],
         }
       }
     },
@@ -445,7 +473,20 @@ module.exports = function (grunt) {
           cwd: '.',
           src: 'bower_components/bootstrap-sass-official/assets/fonts/bootstrap/*',
           dest: '<%= yeoman.dist %>'
+        }, {
+          expand: true,
+          cwd: 'bower_components/appcache-nanny',
+          dest: '<%= yeoman.dist %>',
+          src: ['appcache-loader.html'],
         }]
+      },
+      tmp: {
+        files: [{
+          expand: true,
+          cwd: 'bower_components/appcache-nanny',
+          dest: '.tmp/',
+          src: ['appcache-loader.html'],
+        }],
       },
       styles: {
         expand: true,
@@ -494,6 +535,7 @@ module.exports = function (grunt) {
       'concurrent:server',
       'autoprefixer:server',
       'connect:livereload',
+      'copy:tmp',
       'watch'
     ]);
   });
@@ -526,8 +568,9 @@ module.exports = function (grunt) {
     'cssmin',
     'uglify',
     'filerev',
+    'manifest',
     'usemin',
-    'htmlmin'
+    'htmlmin',
   ]);
 
   grunt.registerTask('default', [

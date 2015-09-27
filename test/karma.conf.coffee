@@ -25,6 +25,7 @@ module.exports = (config) ->
       'bower_components/angular-route/angular-route.js'
       'bower_components/angular-sanitize/angular-sanitize.js'
       'bower_components/angular-touch/angular-touch.js'
+      'bower_components/appcache-nanny/appcache-nanny.js'
       'bower_components/bootstrap-sass-official/assets/javascripts/bootstrap.js'
       'bower_components/moment/moment.js'
       'bower_components/simpleWeather/jquery.simpleWeather.js'
