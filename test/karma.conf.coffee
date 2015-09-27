@@ -27,6 +27,7 @@ module.exports = (config) ->
       'bower_components/angular-touch/angular-touch.js'
       'bower_components/appcache-nanny/appcache-nanny.js'
       'bower_components/bootstrap-sass-official/assets/javascripts/bootstrap.js'
+      'bower_components/bootswatch-dist/js/bootstrap.js'
       'bower_components/moment/moment.js'
       'bower_components/simpleWeather/jquery.simpleWeather.js'
       'bower_components/angular-mocks/angular-mocks.js'

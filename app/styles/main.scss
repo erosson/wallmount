@@ -1,7 +1,7 @@
 $icon-font-path: "../bower_components/bootstrap-sass-official/assets/fonts/bootstrap/";
-// bower:scss
-@import "bootstrap-sass-official/assets/stylesheets/_bootstrap.scss";
-// endbower
+// xbower:scss
+//@import "bootstrap-sass-official/assets/stylesheets/_bootstrap.scss";
+// xendbower
 
 background {
   position: fixed;
@@ -15,7 +15,7 @@ background {
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-size: cover;
-  opacity: 0.3;
+  opacity: 0.15;
 }
 .clock, .weather {
   text-align:center;
