@@ -32,10 +32,10 @@ angular.module('wallmountApp').directive 'bus', ($timeout, $interval, $http, $lo
   template: """
 <h4 ng-repeat="route in routes">
   {{route.config.label}}:
-  <span ng-if="!route.stops">
+  <span ng-if="!(route.stops && route.stops.length > 0)">
     <i>NOPE.</i>
   </span>
-  <span ng-if="route.stops">
+  <span ng-if="route.stops && route.stops.length > 0">
     <span ng-repeat="stop in route.stops" ng-class="{arrivingTooSoon:stop.isArrivingTooSoon(), alreadyPassed:stop.untilArrivalMins() <= 0}">
       <!-- {{stop.untilArrivalStr()}}<span ng-if="!$last">,</span> -->
       {{stop.untilArrivalMins() | number:0}}<span ng-if="!$last">,</span>
