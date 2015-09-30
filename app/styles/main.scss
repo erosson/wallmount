@@ -3,6 +3,13 @@ $icon-font-path: "../bower_components/bootstrap-sass-official/assets/fonts/boots
 //@import "bootstrap-sass-official/assets/stylesheets/_bootstrap.scss";
 // xendbower
 
+.arrivingTooSoon {
+  text-decoration:line-through;
+}
+.alreadyPassed {
+  display:none;
+}
+
 background {
   position: fixed;
   top: 0;
