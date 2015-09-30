@@ -30,7 +30,7 @@ class BusStopTime
 angular.module('wallmountApp').directive 'bus', ($timeout, $interval, $http, $location) ->
   restrict: 'EA'
   template: """
-<div ng-repeat="route in routes">
+<h4 ng-repeat="route in routes">
   {{route.config.label}}:
   <span ng-if="!route.stops">
     <i>NOPE.</i>
@@ -41,7 +41,7 @@ angular.module('wallmountApp').directive 'bus', ($timeout, $interval, $http, $lo
       {{stop.untilArrivalMins() | number:0}}<span ng-if="!$last">,</span>
     </span> minutes
   </span>
-</div>
+</h4>
 """
   link: (scope, element, attrs) ->
     CONFIG = $location.search().busconfig
