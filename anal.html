@@ -1,0 +1,13 @@
+<!doctype html> <html> <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script> <script>function fetchAndPopulate(id, url) {
+      $.getJSON(url, function(res) {
+        var val = res.rows[0][res.rows[0].length-1];
+        val = parseInt(val).toLocaleString();
+        $('#'+id).text(val);
+        console.log(id, val, res);
+      })
+    }
+    fetchAndPopulate('rt', 'https://swarmsim-wallboard.appspot.com/query?id=ahRzfnN3YXJtc2ltLXdhbGxib2FyZHIVCxIIQXBpUXVlcnkYgICAgICAgAoM');
+    fetchAndPopulate('1d', 'https://swarmsim-wallboard.appspot.com/query?id=ahRzfnN3YXJtc2ltLXdhbGxib2FyZHIVCxIIQXBpUXVlcnkYgICAgLrRkAoM');
+    fetchAndPopulate('7d', 'https://swarmsim-wallboard.appspot.com/query?id=ahRzfnN3YXJtc2ltLXdhbGxib2FyZHIVCxIIQXBpUXVlcnkYgICAwMiqhAoM');
+    fetchAndPopulate('14d', 'https://swarmsim-wallboard.appspot.com/query?id=ahRzfnN3YXJtc2ltLXdhbGxib2FyZHIVCxIIQXBpUXVlcnkYgICAgN7-mAoM');
+    fetchAndPopulate('30d', 'https://swarmsim-wallboard.appspot.com/query?id=ahRzfnN3YXJtc2ltLXdhbGxib2FyZHIVCxIIQXBpUXVlcnkYgICAwMjelQoM');</script> <div>Swarmsim Users</div> <div>rt: <span id="rt">...</span></div> <div>1d: <span id="1d">...</span></div> <div>7d: <span id="7d">...</span></div> <div>14d: <span id="14d">...</span></div> <div>30d: <span id="30d">...</span></div> </html>
